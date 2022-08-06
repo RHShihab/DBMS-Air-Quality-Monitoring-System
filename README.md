@@ -26,3 +26,14 @@
   - Client
   - Server
 - Extras: (contains all the extra contents and reference items that the team has compiled)
+
+<hr>
+
+## Setting up NODEJS and  installing dependencies/packages
+
+- ### Initialize NODEJS in server directory
+  > cd Code/Server/ <br> 
+  > npm init -y
+
+- ### Install dependencies/packages
+  > npm i express mysql nodemon dotenv cors --save
