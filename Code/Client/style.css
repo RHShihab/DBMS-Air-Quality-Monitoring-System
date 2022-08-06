@@ -1,0 +1,19 @@
+.card {
+  margin-bottom: 30px !important;
+}
+.air-quality {
+  /* background-color: aquamarine; */
+  margin-left: 0vmin;
+  margin-right: 0vmin;
+  text-align: center;
+  align-items: center;
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}
+.row {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.fixed-top {
+  z-index: 1020 !important;
+}
