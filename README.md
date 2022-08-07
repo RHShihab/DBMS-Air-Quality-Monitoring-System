@@ -29,11 +29,24 @@
 
 <hr>
 
-## Setting up NODEJS and  installing dependencies/packages
+## Setting up NODEJS and installing dependencies/packages
 
 - ### Initialize NODEJS in server directory
-  > cd Code/Server/ <br> 
+
+  > cd Code/Server/ <br>
   > npm init -y
 
 - ### Install dependencies/packages
   > npm i express mysql nodemon dotenv cors --save
+
+<hr>
+
+## Create a file named {.env} in the Code/Server/ directory
+
+- Content of the file should be written as follow:
+  > PORT = backendPort (5000/3000/2000 etc) <br>
+  > DBPORT = databasePortFromMySql (e.g. 3306) <br>
+  > HOST = localhost <br>
+  > USER = root <br>
+  > PASSWORD = root <br>
+  > DATABASE = nameOfYourDatabase <br>

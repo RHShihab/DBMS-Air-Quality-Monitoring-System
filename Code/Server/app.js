@@ -19,4 +19,6 @@ app.get("/", (request, response) => {
     .catch((err) => console.log(err));
 });
 
-app.listen(process.env.PORT, () => console.log("app is running"));
+app.listen(process.env.PORT, () =>
+  console.log("app is running at http://localhost:" + process.env.PORT)
+);
