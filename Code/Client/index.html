@@ -16,7 +16,7 @@
     />
     <link rel="stylesheet" href="style.css" />
 
-    <nav class="navbar navbar-light bg-light shadow-sm fixed-top">
+    <nav class="navbar navbar-dark shadow fixed-top">
       <div class="container">
         <a class="navbar-brand" href="index.html">
           <img src="images/bdLogo.svg" alt="" width="50" />
@@ -27,17 +27,15 @@
         </form>
       </div>
     </nav>
+    <script type="module" src="index.js"></script>
   </head>
 
-  <body class="container" style="padding-top: 100px">
+  <body class="container">
     <div class="card shadow" style="width: 23rem">
       <div class="card-body">
         <h5 class="card-title text-center">Air Quality of SOMEPLACE</h5>
         <hr />
-        <div
-          class="row border rounded air-quality"
-          style="background-color: rgb(238, 220, 128)"
-        >
+        <div class="row border rounded air-quality">
           <div class="col">pm2.5<br />127 μg/m<sup>3</sup></div>
           <div class="col border-start">
             <div class="row border-bottom">
@@ -64,56 +62,37 @@
       </div>
     </div>
 
-    <div class="card shadow" style="width: 46rem;">
+    <div class="card shadow" style="width: 46rem">
       <div class="card-body">
-        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-        <script src="lineChart.js"></script>
-        <div id="chart_div" style="height: 25rem;"></div>
-      </div>
-    </div>
-
-    <div class="card shadow" style="width: 23rem">
-      <div class="card-body">
-        <form>
-          <div class="mb-3">
-            <label for="division">Division:</label>
+        <h5 class="card-title text-center">
+          Popularity of Dogs and Cats over Time
+        </h5>
+        <script
+          type="text/javascript"
+          src="https://www.gstatic.com/charts/loader.js"
+        ></script>
+        <script type="module" src="lineChart.js"></script>
+        <div id="chart_div" style="height: 25rem"></div>
+        <div class="d-flex justify-content-around">
+          <div class="mb-3 DateTextBox">
+            <label for="line-fromDate">From</label>
             <input
-              type="text"
+              type="date"
+              name="line-fromDate"
+              id="line-fromDate"
               class="form-control"
-              id="division"
-              placeholder=""
             />
           </div>
-          <div class="mb-3">
-            <label for="pmData">pm2.5: (μg/m<sup>3</sup>)</label>
+          <div class="mb-3 DateTextBox">
+            <label for="line-toDate">From</label>
             <input
-              type="number"
+              type="date"
+              name="line-toDate"
+              id="line-toDate"
               class="form-control"
-              id="pmData"
-              placeholder=""
             />
           </div>
-          <div class="mb-3">
-            <label for="windData">Wind Speed: (km/h)</label>
-            <input
-              type="number"
-              class="form-control"
-              id="windData"
-              placeholder=""
-            />
-          </div>
-          <div class="form-check">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              id="exampleCheck1"
-            />
-            <label class="form-check-label" for="exampleCheck1"
-              >Check me out</label
-            >
-          </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+        </div>
       </div>
     </div>
 

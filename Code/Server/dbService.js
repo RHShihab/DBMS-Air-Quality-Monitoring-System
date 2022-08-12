@@ -35,7 +35,7 @@ class DbService {
   async getAllData() {
     try {
       const response = await new Promise((resolve, reject) => {
-        const query = "SELECT time, pm25 FROM datasheet.aqmTable LIMIT 10;";
+        const query = "SELECT time, pm25 FROM datasheet.aqm_table LIMIT 10;";
         connection.query(query, (err, results) => {
           if (err) reject(new Error(err.message));
           resolve(results);
