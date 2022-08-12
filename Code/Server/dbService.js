@@ -49,13 +49,13 @@ class DbService {
     }
   }
 
-  async getSelectedData(){
-    var startDate = "'2017-01-10'";
-    var endDate = "'2017-02-10'";
+  async getSelectedData(startDate, endDate){
+    // var startDate = "'2017-01-10'";
+    // var endDate = "'2017-02-10'";
     try {
       const response = await new Promise((resolve, reject) => {
-        const query = "SELECT time, pm25 FROM datasheet.aqm_table WHERE time BETWEEN "
-        + startDate + " AND " + endDate;
+        const query = "SELECT time, pm25 FROM datasheet.aqm_table WHERE time BETWEEN '"
+        + startDate + "' AND '" + endDate + "'";
         connection.query(query, (err, results) => {
           if (err) reject(new Error(err.message));
           resolve(results);

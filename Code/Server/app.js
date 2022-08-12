@@ -19,8 +19,9 @@ app.get("/", (request, response) => {
 });
 
 app.post("/selectedDate", (request, response) => {
+  // console.log(request.body.startDate);
   const db = dbService.getDbServiceInstance();
-  const result = db.getSelectedData();
+  const result = db.getSelectedData(request.body.startDate, request.body.endDate);
 
   result
     .then((data) => response.json({ data: data }))

@@ -1,10 +1,11 @@
 import { getJsonData } from "./index.js";
+
 google.charts.load("current", { packages: ["corechart", "line"] });
 google.charts.setOnLoadCallback(drawCurveTypes);
 
 async function drawCurveTypes() {
   // var data = google.visualization.arrayToDataTable(array)
-  let jsonData = await getJsonData();
+  let jsonData = await getJsonData;
   console.log(JSON.stringify(jsonData));
 
   var dataSet = [];

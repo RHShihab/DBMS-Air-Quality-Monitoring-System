@@ -67,11 +67,7 @@
         <h5 class="card-title text-center">
           Popularity of Dogs and Cats over Time
         </h5>
-        <script
-          type="text/javascript"
-          src="https://www.gstatic.com/charts/loader.js"
-        ></script>
-        <script type="module" src="lineChart.js"></script>
+
         <div id="chart_div" style="height: 25rem"></div>
         <div class="d-flex justify-content-around">
           <div class="mb-3 DateTextBox" id="anything">
@@ -92,11 +88,18 @@
               class="form-control"
             />
           </div>
-          <button class="submit" type="submit" id="reloadLineChart" value="2">Reload</button>
+          <button class="submit" type="submit" id="reloadLineChart" value="2">
+            Reload
+          </button>
         </div>
       </div>
     </div>
 
+    <script
+      type="text/javascript"
+      src="https://www.gstatic.com/charts/loader.js"
+    ></script>
+    <script type="module" src="lineChart.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
