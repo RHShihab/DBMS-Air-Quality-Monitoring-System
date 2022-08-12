@@ -35,7 +35,7 @@ class DbService {
   async getAllData() {
     try {
       const response = await new Promise((resolve, reject) => {
-        const query = "SELECT time, pm25 FROM datasheet.aqm_table LIMIT 10;";
+        const query = "SELECT time, pm25 FROM datasheet.aqm_table LIMIT 100;";
         connection.query(query, (err, results) => {
           if (err) reject(new Error(err.message));
           resolve(results);
@@ -43,6 +43,26 @@ class DbService {
       });
 
       // console.log(response);
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async getSelectedData(){
+    var startDate = "'2017-01-10'";
+    var endDate = "'2017-02-10'";
+    try {
+      const response = await new Promise((resolve, reject) => {
+        const query = "SELECT time, pm25 FROM datasheet.aqm_table WHERE time BETWEEN "
+        + startDate + " AND " + endDate;
+        connection.query(query, (err, results) => {
+          if (err) reject(new Error(err.message));
+          resolve(results);
+        });
+      });
+
+      console.log(response);
       return response;
     } catch (error) {
       console.log(error);

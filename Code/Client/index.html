@@ -27,7 +27,7 @@
         </form>
       </div>
     </nav>
-    <script type="module" src="index.js"></script>
+    <!-- <script type="module" src="index.js"></script> -->
   </head>
 
   <body class="container">
@@ -74,24 +74,25 @@
         <script type="module" src="lineChart.js"></script>
         <div id="chart_div" style="height: 25rem"></div>
         <div class="d-flex justify-content-around">
-          <div class="mb-3 DateTextBox">
+          <div class="mb-3 DateTextBox" id="anything">
             <label for="line-fromDate">From</label>
             <input
               type="date"
               name="line-fromDate"
-              id="line-fromDate"
+              id="lineStartDate"
               class="form-control"
             />
           </div>
           <div class="mb-3 DateTextBox">
-            <label for="line-toDate">From</label>
+            <label for="line-toDate">To</label>
             <input
               type="date"
               name="line-toDate"
-              id="line-toDate"
+              id="lineEndDate"
               class="form-control"
             />
           </div>
+          <button class="submit" type="submit" id="reloadLineChart" value="2">Reload</button>
         </div>
       </div>
     </div>

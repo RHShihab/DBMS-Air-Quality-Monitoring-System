@@ -11,8 +11,16 @@ app.use(express.urlencoded({ extended: false }));
 
 app.get("/", (request, response) => {
   const db = dbService.getDbServiceInstance();
-
   const result = db.getAllData();
+
+  result
+    .then((data) => response.json({ data: data }))
+    .catch((err) => console.log(err));
+});
+
+app.post("/selectedDate", (request, response) => {
+  const db = dbService.getDbServiceInstance();
+  const result = db.getSelectedData();
 
   result
     .then((data) => response.json({ data: data }))
