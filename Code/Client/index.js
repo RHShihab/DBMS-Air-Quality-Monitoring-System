@@ -7,19 +7,19 @@ const startElem = document.getElementById("lineStartDate");
 const endElem = document.getElementById("lineEndDate");
 // const endElem = document.getElementById('end');
 
-startElem.addEventListener("change", function (e) {
-  console.log("start", e.target.value);
-  startDate = e.target.value;
-});
+// startElem.addEventListener("change", function (e) {
+//   console.log("start", e.target.value);
+//   startDate = e.target.value;
+// });
 
-endElem.addEventListener("change", function (e) {
-  console.log("end", e.target.value);
-  endDate = e.target.value;
-});
+// endElem.addEventListener("change", function (e) {
+//   console.log("end", e.target.value);
+//   endDate = e.target.value;
+// });
 
-document.getElementById("reloadLineChart").onclick = function () {
-  getSelectedData(startDate, endDate);
-};
+// document.getElementById("reloadLineChart").onclick = function () {
+//   getSelectedData(startDate, endDate);
+// };
 
 async function getSelectedData(startDate, endDate) {
   // console.log(startDate + endDate);

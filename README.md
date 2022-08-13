@@ -29,7 +29,16 @@
 
 <hr>
 
-## Setting up NODEJS and installing dependencies/packages
+## Setting up [chart js](https://www.chartjs.org/) for Client codes
+
+- ### Initialize NODEJS in server directory
+
+  > cd Code/Client/ <br>
+  > npm install chart.js
+
+<hr>
+
+## Setting up NODEJS and installing dependencies/packages for Server codes
 
 - ### Initialize NODEJS in server directory
 

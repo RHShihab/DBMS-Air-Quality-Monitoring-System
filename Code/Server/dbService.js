@@ -35,7 +35,7 @@ class DbService {
   async getAllData() {
     try {
       const response = await new Promise((resolve, reject) => {
-        const query = "SELECT time, pm25 FROM datasheet.aqm_table LIMIT 100;";
+        const query = "SELECT time, pm25, avgTemperature, rainPrecipitation, relativeHumidity FROM datasheet.aqm_table LIMIT 50;";
         connection.query(query, (err, results) => {
           if (err) reject(new Error(err.message));
           resolve(results);
@@ -54,7 +54,7 @@ class DbService {
     // var endDate = "'2017-02-10'";
     try {
       const response = await new Promise((resolve, reject) => {
-        const query = "SELECT time, pm25 FROM datasheet.aqm_table WHERE time BETWEEN '"
+        const query = "SELECT time, pm25, avgTemperature, rainPrecipitation, relativeHumidity FROM datasheet.aqm_table WHERE time BETWEEN '"
         + startDate + "' AND '" + endDate + "'";
         connection.query(query, (err, results) => {
           if (err) reject(new Error(err.message));
