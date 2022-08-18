@@ -16,9 +16,9 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="style.css" />
-    <script type="module" src="chart.js"></script>
+    <script type="module" src="orgChart.js"></script>
 
-    <nav class="navbar navbar-dark shadow fixed-top">
+    <nav class="navbar shadow fixed-top">
       <div class="container">
         <a class="navbar-brand" href="index.html">
           <img src="images/bdLogo.svg" alt="" width="50" />
@@ -64,50 +64,43 @@
       </div>
     </div>
 
-    <!-- <div class="card shadow" style="width: 46rem">
-      <div class="card-body">
-        <h5 class="card-title text-center">
-          Popularity of Dogs and Cats over Time
-        </h5>
-
-        <div id="chart_div" style="height: 25rem"></div>
-        <div class="d-flex justify-content-around">
-          <div class="mb-3 DateTextBox" id="anything">
-            <label for="line-fromDate">From</label>
-            <input
-              type="date"
-              name="line-fromDate"
-              id="lineStartDate"
-              class="form-control"
-            />
-          </div>
-          <div class="mb-3 DateTextBox">
-            <label for="line-toDate">To</label>
-            <input
-              type="date"
-              name="line-toDate"
-              id="lineEndDate"
-              class="form-control"
-            />
-          </div>
-          <button class="submit" type="submit" id="reloadLineChart">
-            Reload
-          </button>
-        </div>
-      </div>
-    </div> -->
-
-    <div class="card">
+    <div class="card shadow">
       <div class="card-body">
         <h5 class="card-title text-center">Air Quality Parameters Over Time</h5>
-        <canvas id="myChart" width="20rem" height="10rem"></canvas>
+        <canvas id="orgLineChart" width="20rem" height="10rem"></canvas>
       </div>
     </div>
 
+    <div class="card shadow">
+      <div class="card-body">
+        <h5 class="card-title text-center">Scatter Chart</h5>
+        <canvas id="orgScatterChart" width="20rem" height="10rem"></canvas>
+      </div>
+    </div>
+
+    <!-- <div class="card shadow">
+      <div class="card-body">
+        <h5 class="card-title text-center">Box plot</h5>
+        <canvas id="orgBoxplotChart" width="20rem" height="10rem"></canvas>
+      </div>
+    </div> -->
+    
     <script
       type="text/javascript"
       src="https://www.gstatic.com/charts/loader.js"
     ></script>
+    <!-- the boxplot library should be loaded after the chart js library -->
+    <!-- Library for the boxplot chart -->
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/@sgratzl/chartjs-chart-boxplot@3.6.0/build/index.umd.min.js"
+    ></script>
+    <!-- library for the geo chart -->
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/chartjs-chart-geo@3.5.2/build/index.umd.min.js"
+    ></script>
+    
     <!-- <script type="module" src="lineChart.js"></script> -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"

@@ -1,10 +1,9 @@
 import { getJsonData } from "./index.js";
 
 let jsonData = await getJsonData;
-console.log(JSON.stringify(jsonData));
+// console.log(JSON.stringify(jsonData));
 // const labels = ["time", "pm25", "March", "April", "May", "June"];
-
-const data = {
+const orgLineData = {
   //   labels: labels,
   datasets: [
     {
@@ -62,21 +61,96 @@ const data = {
   ],
 };
 
-const config = {
+const lineConfig = {
   type: "line",
-  data,
+  data: orgLineData,
   options: {
     scales: {
       x: {
-        ticks: { color: "white", beginAtZero: true, maxTicksLimit: 20 },
+        ticks: { color: "black", beginAtZero: true, maxTicksLimit: 20 },
         grid: { color: "grey" },
       },
       y: {
-        ticks: { color: "white", beginAtZero: true },
+        ticks: { color: "black", beginAtZero: true },
         grid: { color: "grey" },
       },
     },
   },
 };
 
-const myChart = new Chart(document.getElementById("myChart"), config);
+const lineChart = new Chart(
+  document.getElementById("orgLineChart"),
+  lineConfig
+);
+
+const orgScatterData = {
+  //   labels: labels,
+  datasets: [
+    {
+      label: "pm2.5",
+      backgroundColor: "rgb(214, 161, 92)",
+      borderColor: "rgb(214, 161, 92)",
+      //   data: [0, 10, 5, 2, 20, 30, 45],
+      // data: [
+      //   { x: 34, y: 23 },
+      //   { x: 54, y: 23 },
+      //   { x: 65, y: 12 },
+      //   { x: 53, y: 64 },
+      //   { x: 13, y: 54 }
+      // ],
+      data: jsonData,
+      parsing: {
+        //this sets the x and y axis labels
+        xAxisKey: "relativeHumidity",
+        yAxisKey: "pm25",
+      },
+    },
+  ],
+};
+
+const scatterConfig = {
+  type: "scatter",
+  data: orgScatterData,
+  options: {
+  },
+};
+
+const scatterChart = new Chart(
+  document.getElementById("orgScatterChart"),
+  scatterConfig
+);
+
+const orgBoxplotData = {
+  //   labels: labels,
+  datasets: [
+    {
+      label: "pm2.5",
+      outlierColor: "#999999",
+      backgroundColor: "rgba(214, 161, 92, 0.2)",
+      borderColor: "rgb(214, 161, 92)",
+      padding:0,
+      itemRadius:0,
+      data: jsonData,
+      parsing: {
+        //this sets the x and y axis labels
+        xAxisKey: "pm25",
+      },
+    },
+  ],
+};
+
+const BoxplotConfig = {
+  type: "boxplot",
+  data: orgBoxplotData,
+  options: {
+    responsive: true,
+    legend: {
+      position: "top",
+    },
+  },
+};
+
+// const BoxplotChart = new Chart(
+//   document.getElementById("orgBoxplotChart"),
+//   BoxplotConfig
+// );

@@ -1,17 +1,24 @@
-const userId = document.querySelector("#userID");
-const userPass = document.querySelector("#userPassword");
+var divisionVal;
+var pmVal;
 
-const logInButton = document.querySelector(".loginButton");
+const divisionValElem = document.getElementById("divisionBox");
+const pmValElem = document.getElementById("pmBox");
 
-logInButton.addEventListener("click", logIn);
+// Gets the division data when the value is changed in the text box
+// and saves it to divisionVal
+divisionValElem.addEventListener("change", function (e) {
+  console.log("divisionBox", e.target.value);
+  divisionVal = e.target.value;
+});
 
-function logIn(e){
+pmValElem.addEventListener("change", function (e) {
+    console.log("pmBox", e.target.value);
+    pmVal = e.target.value;
+});
+
+// event handler for the submit button.
+// does "something" when the button is clicked
+document.getElementById("dataSubmitButton").addEventListener("click", function(e) {
     e.preventDefault();
-    console.log(userId.value);
-    if(userId.value=="shihab" && userPass.value=="joss"){
-        location.href = "admin.html";
-    }
-    else{
-
-    }
-}
+    console.log(divisionVal, pmVal); // something
+});

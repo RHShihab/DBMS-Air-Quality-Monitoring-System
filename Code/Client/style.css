@@ -1,17 +1,14 @@
 body{
   padding-top: 100px;
-  background-color : #212529 ;
-  color: aliceblue
 }
 .navbar {
-  background-color: rgba(53, 60, 67, 0.9) !important;
+  background-color: rgba(255, 255, 255, 0.9) !important;
   backdrop-filter: blur(9.9px);
   -webkit-backdrop-filter: blur(9.9px);
-  border-bottom: 1px solid rgba(118, 149, 130, 0.9);
+  border-bottom: 1px solid rgba(142, 142, 142, 0.9);
 }
 .card {
   margin-bottom: 30px !important;
-  background-color: rgba(53, 60, 67, 0.9) !important;
 }
 .air-quality {
   /* background-color: aquamarine; */
@@ -21,8 +18,7 @@ body{
   align-items: center;
   padding-top: 0px !important;
   padding-bottom: 0px !important;
-  color:rgba(53, 60, 67, 0.9);
-  background-color: rgb(238, 220, 128);
+  background-color: rgb(234, 192, 109);
 }
 .row {
   padding-top: 10px;
