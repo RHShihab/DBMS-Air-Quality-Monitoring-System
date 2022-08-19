@@ -14,17 +14,19 @@
       integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <title>Admin | Amar Quality Monitor</title>
     <nav class="navbar navbar-dark shadow fixed-top">
-        <div class="container">
-          <a class="navbar-brand" href="index.html">
-            <img src="images/bdLogo.svg" alt="" width="50" />
-            Amader Quality Monitor
-          </a>
-          <button class="btn btn-primary"><i class="fa fa-home" aria-hidden="true"></i></button>
-        </div>
-      </nav>
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <img src="images/bdLogo.svg" alt="" width="50" />
+          Amader Quality Monitor
+        </a>
+        <button class="btn btn-primary">
+          <i class="fa fa-home" aria-hidden="true"></i>
+        </button>
+      </div>
+    </nav>
   </head>
   <body class="container">
     <div class="card shadow" style="width: 23rem">
@@ -33,27 +35,27 @@
           <div class="mb-3">
             <label for="division">Division:</label>
             <input
-              type="text"
+              type="varchar(100)"
               class="form-control"
               id="divisionBox"
               placeholder=""
             />
           </div>
           <div class="mb-3">
-            <label for="pmData">pm2.5: (μg/m<sup>3</sup>)</label>
+            <label for="organization">Organization</label>
             <input
-              type="number"
+              type="varchar(100)"
               class="form-control"
-              id="pmBox"
+              id="organizationBox"
               placeholder=""
             />
           </div>
           <div class="mb-3">
-            <label for="windData">Wind Speed: (km/h)</label>
+            <label for="pmData">pm2.5: (μg/m<sup>3</sup>)</label>
             <input
-              type="number"
+              type="double"
               class="form-control"
-              id="windData"
+              id="pmBox"
               placeholder=""
             />
           </div>
@@ -67,7 +69,9 @@
               >Check me out</label
             >
           </div>
-          <button type="submit" id="dataSubmitButton" class="btn btn-primary">Submit</button>
+          <button type="submit" id="dataSubmitButton" class="btn btn-primary">
+            Submit
+          </button>
         </form>
       </div>
     </div>

@@ -35,7 +35,8 @@ class DbService {
   async getAllData() {
     try {
       const response = await new Promise((resolve, reject) => {
-        const query = "SELECT time, pm25, avgTemperature, rainPrecipitation, relativeHumidity, division FROM datasheet.aqm_table LIMIT 50;";
+        const query =
+          "SELECT time, pm25, avgTemperature, rainPrecipitation, relativeHumidity, division FROM datasheet.aqm_table ORDER BY time DESC LIMIT 50;";
         connection.query(query, (err, results) => {
           if (err) reject(new Error(err.message));
           resolve(results);
@@ -49,21 +50,30 @@ class DbService {
     }
   }
 
-  async getSelectedData(startDate, endDate){
-    // var startDate = "'2017-01-10'";
-    // var endDate = "'2017-02-10'";
+  async insertData(localTime, pmVal, divisionVal, orgVal) {
     try {
-      const response = await new Promise((resolve, reject) => {
-        const query = "SELECT time, pm25, avgTemperature, rainPrecipitation, relativeHumidity, division FROM datasheet.aqm_table WHERE time BETWEEN '"
-        + startDate + "' AND '" + endDate + "'";
-        connection.query(query, (err, results) => {
-          if (err) reject(new Error(err.message));
-          resolve(results);
-        });
-      });
+      // const localDate = new Date();
 
-      console.log(response);
-      return response;
+      const response = await new Promise((resolve, reject) => {
+        const query =
+          "INSERT INTO aqm_table (time, pm25, division, organization) VALUES (?, ?, ?, ?);";
+
+        connection.query(
+          query,
+          [localTime, pmVal, divisionVal, orgVal],
+          (err, result) => {
+            if (err) reject(new Error(err.message));
+            resolve(result.response);
+          }
+        );
+      });
+      // console.log(response);
+      return {
+        localTime: localTime,
+        pmVal: pmVal,
+        divisionVal: divisionVal,
+        orgVal: orgVal,
+      };
     } catch (error) {
       console.log(error);
     }

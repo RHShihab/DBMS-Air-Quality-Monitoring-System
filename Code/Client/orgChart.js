@@ -1,4 +1,4 @@
-import { getJsonData } from "./index.js";
+import { getJsonData } from "./app.js";
 
 let jsonData = await getJsonData;
 // console.log(JSON.stringify(jsonData));
@@ -111,8 +111,7 @@ const orgScatterData = {
 const scatterConfig = {
   type: "scatter",
   data: orgScatterData,
-  options: {
-  },
+  options: {},
 };
 
 const scatterChart = new Chart(
@@ -128,8 +127,8 @@ const orgBoxplotData = {
       outlierColor: "#999999",
       backgroundColor: "rgba(214, 161, 92, 0.2)",
       borderColor: "rgb(214, 161, 92)",
-      padding:0,
-      itemRadius:0,
+      padding: 0,
+      itemRadius: 0,
       data: jsonData,
       parsing: {
         //this sets the x and y axis labels
