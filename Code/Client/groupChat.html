@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Group Chat | Amar Quality Monitor</title>
+    <script
+      src="https://kit.fontawesome.com/e04d6e56ff.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <nav class="navbar shadow fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <img src="images/bdLogo.svg" alt="" width="50" />
+          Amader Quality Monitor
+        </a>
+        <form action="logIn.html">
+          <input type="submit" class="btn btn-primary" value="Log Out" />
+        </form>
+      </div>
+    </nav>
+  </head>
+  <body class="container">
+    <div class="card shadow" style="height: 90%;">
+      <div class="card-body border-bottom">
+          <div class="container">
+            <a class="navbar-brand" href="groupChat.html">
+              Amader Gyan Barta
+            </a>
+          </div>
+        </nav>
+      </div>
+      <div class="card-body">
+        <div class="chat-box overflow-auto" style="height: 60vh;" >
+
+          <div class="message-group">
+            <div class="d-flex flex-row justify-content-end me-3">shihab_bhai</div>
+            <div class="d-flex flex-row justify-content-end mb-4">
+              <div class="p-3 border sentMessageBox">
+                <p class="small mb-0">
+                  kire Fatso. ki khobor?
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="message-group">
+            <div class="d-flex flex-row justify-content-start ms-3">Fatso</div>
+            <div class="d-flex flex-row justify-content-start mb-4">
+              <div class="p-3 border receivedMessageBox">
+                <p class="small mb-0">
+                  valoi valoi. Tor ki khobor bol.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="form-outline card-body border-top">
+        <label class="form-label" for="textAreaExample"
+          >Your message:</label>
+          <div class="d-flex align-items-end">
+            <span class="input form-control messageBox" role="textbox" contenteditable></span>
+            <button class="btn btn-primary sendButton ms-3"><i class="fa fa-send" aria-hidden="true"></i></button>
+          </div>
+      </div>
+    </div>
+    <script src="groupChat.js"></script>
+  </body>
+</html>
