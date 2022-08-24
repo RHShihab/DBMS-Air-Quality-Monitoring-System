@@ -1,5 +1,8 @@
 const mysql = require("mysql");
 const dotenv = require("dotenv");
+const fs = require("fs");
+const csv = require("fast-csv");
+
 let instance = null;
 dotenv.config();
 
@@ -18,15 +21,6 @@ connection.connect((err) => {
   console.log("db " + connection.state);
 });
 
-// const query = "SELECT * FROM userData.empInfo;";
-// connection.query(query, (err, res) => {
-//   if (err) {
-//     throw err;
-//   } else {
-//     return console.log(res);
-//   }
-// });
-
 class DbService {
   static getDbServiceInstance() {
     return instance ? instance : new DbService();
@@ -36,7 +30,7 @@ class DbService {
     try {
       const response = await new Promise((resolve, reject) => {
         const query =
-          "SELECT time, pm25, avgTemperature, rainPrecipitation, relativeHumidity, division FROM datasheet.aqm_table ORDER BY time DESC LIMIT 50;";
+          "SELECT time, pm25, avgTemperature, rainPrecipitation, relativeHumidity, division FROM (SELECT * FROM datasheet.aqm_table ORDER BY time DESC LIMIT 50) AS latestData ORDER BY time;";
         connection.query(query, (err, results) => {
           if (err) reject(new Error(err.message));
           resolve(results);
@@ -77,6 +71,33 @@ class DbService {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  async UploadCsvDataToMySQL(filePath) {
+    console.log("This is filepath: " + filePath);
+
+    let stream = fs.createReadStream(filePath);
+    let csvData = [];
+    let csvStream = csv
+      .parse()
+      .on("data", function (data) {
+        csvData.push(data);
+      })
+      .on("end", function () {
+        // Remove Header ROW
+        csvData.shift();
+
+        let query =
+          "INSERT INTO aqm_table (time, pm25, division, organization) VALUES ?";
+        connection.query(query, [csvData], (error, response) => {
+          console.log(error || response);
+        });
+
+        // delete file after saving to MySQL database
+        fs.unlinkSync(filePath);
+      });
+
+    stream.pipe(csvStream);
   }
 }
 console.log(process.env.DBPORT);

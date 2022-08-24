@@ -47,6 +47,7 @@
 
 - ### Install dependencies/packages
   > npm i express mysql nodemon dotenv cors --save
+  > npm i fs fast-csv body-parser express-fileupload --save
 
 <hr>
 

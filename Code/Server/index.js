@@ -1,32 +1,23 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-require("dotenv").config();
+const bodyparser = require("body-parser");
+const uploads = require("express-fileupload");
 
+require("dotenv").config();
 const dbService = require("./dbService");
 
 app.use(cors());
 app.use(express.json());
+app.use(express.static("./public"));
 app.use(express.urlencoded({ extended: false }));
-
-app.post("/insert", (request, response) => {
-  console.log(request.body);
-
-  const { localTime, pmVal, divisionVal, orgVal } = request.body;
-
-  // const { localTime } = request.body;
-  // const { pmVal } = request.body;
-  // const { divisionVal } = request.body;
-  // const { orgVal } = request.body;
-
-  const db = dbService.getDbServiceInstance();
-
-  const result = db.insertData(localTime, pmVal, divisionVal, orgVal);
-
-  result
-    .then(data => response.json({ data: data }))
-    .catch((err) => console.log(err));
-});
+app.use(bodyparser.json());
+app.use(
+  bodyparser.urlencoded({
+    extended: true,
+  })
+);
+app.use(uploads());
 
 app.get("/", (request, response) => {
   const db = dbService.getDbServiceInstance();
@@ -35,6 +26,48 @@ app.get("/", (request, response) => {
   result
     .then((data) => response.json({ data: data }))
     .catch((err) => console.log(err));
+});
+
+app.post("/insert", (request, response) => {
+  console.log(request.body);
+
+  const { localTime, pmVal, divisionVal, orgVal } = request.body;
+
+  const db = dbService.getDbServiceInstance();
+
+  const result = db.insertData(localTime, pmVal, divisionVal, orgVal);
+
+  result
+    .then((data) => response.json({ data: data }))
+    .catch((err) => console.log(err));
+});
+
+app.post("/uploadfile", (req, res) => {
+  if (req.files) {
+    console.log(req.files);
+    var file = req.files.uploadFile;
+    var filename = file.name;
+
+    console.log(filename);
+
+    file.mv("./uploads/" + filename, function (err) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("File Uploaded");
+      }
+    });
+
+    const db = dbService.getDbServiceInstance();
+    db.UploadCsvDataToMySQL("./uploads/" + filename);
+
+    // fs.createReadStream("./uploads/" + filename)
+    //   .pipe(parser({}))
+    //   .on("data", (data) => results.push(data))
+    //   .on("end", () => {
+    //     console.log(results);
+    //   });
+  }
 });
 
 app.listen(process.env.PORT, () =>
