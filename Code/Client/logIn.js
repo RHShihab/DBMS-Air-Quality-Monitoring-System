@@ -15,3 +15,9 @@ function logIn(e){
 
     }
 }
+document.querySelector(".homeButton").addEventListener("click", goHome);
+
+function goHome(e){
+    e.preventDefault();
+    location.href = "index.html";
+}
