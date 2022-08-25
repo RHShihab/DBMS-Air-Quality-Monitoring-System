@@ -80,21 +80,44 @@
       <div class="card-body">
         <form
           method="post"
-          action="http://localhost:3000/uploadfile"
+          action="http://localhost:3000/uploadweather"
           enctype="multipart/form-data"
         >
-        <p>Upload CSV File: </p>
+          <p>Upload CSV File for Weather Station Data:</p>
           <input
             type="file"
             class="form-control mb-3"
-            name="uploadFile"
+            name="uploadWeather"
             accept="csv"
           />
           <input
             type="submit"
             class="form-control btn btn-primary"
             value="Upload CSV"
-            id="uploadFileButton"
+            id="uploadWeatherButton"
+          />
+        </form>
+      </div>
+    </div>
+    <div class="card shadow" style="width: 23rem">
+      <div class="card-body">
+        <form
+          method="post"
+          action="http://localhost:3000/uploadsensor"
+          enctype="multipart/form-data"
+        >
+          <p>Upload CSV File for Sensor Data:</p>
+          <input
+            type="file"
+            class="form-control mb-3"
+            name="uploadSensor"
+            accept="csv"
+          />
+          <input
+            type="submit"
+            class="form-control btn btn-primary"
+            value="Upload CSV"
+            id="uploadSensorButton"
           />
         </form>
       </div>

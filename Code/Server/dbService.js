@@ -29,8 +29,7 @@ class DbService {
   async getAllData() {
     try {
       const response = await new Promise((resolve, reject) => {
-        const query =
-          "SELECT date, pm25 FROM (SELECT * FROM mydb.weather_station_data_table ORDER BY date DESC LIMIT 50) AS latestData ORDER BY date;";
+        const query = "SELECT date, pm25 FROM weather_station_data_table;";
         connection.query(query, (err, results) => {
           if (err) reject(new Error(err.message));
           resolve(results);
@@ -49,11 +48,10 @@ class DbService {
       // const localDate = new Date();
 
       const response = await new Promise((resolve, reject) => {
-        const query =
-          "INSERT INTO aqm_table (time, pm25, division, organization) VALUES (?, ?, ?, ?);";
-
+        const query1 =
+          "INSERT INTO weather_station_data_table (date, pm25, location, organizationName) VALUES (?,?,?,?);";
         connection.query(
-          query,
+          query1,
           [localTime, pmVal, divisionVal, orgVal],
           (err, result) => {
             if (err) reject(new Error(err.message));
@@ -73,7 +71,7 @@ class DbService {
     }
   }
 
-  async UploadCsvDataToMySQL(filePath) {
+  async UploadWeatherCsvDataToMySQL(filePath) {
     console.log("This is filepath: " + filePath);
 
     let stream = fs.createReadStream(filePath);
@@ -88,7 +86,34 @@ class DbService {
         csvData.shift();
 
         let query =
-          "INSERT INTO aqm_table (time, pm25, division, organization) VALUES ?";
+          "INSERT INTO weather_station_data_table (date, pm25, location, organizationName) VALUES ?";
+        connection.query(query, [csvData], (error, response) => {
+          console.log(error || response);
+        });
+
+        // delete file after saving to MySQL database
+        fs.unlinkSync(filePath);
+      });
+
+    stream.pipe(csvStream);
+  }
+
+  async UploadSensorCsvDataToMySQL(filePath) {
+    console.log("This is filepath: " + filePath);
+
+    let stream = fs.createReadStream(filePath);
+    let csvData = [];
+    let csvStream = csv
+      .parse()
+      .on("data", function (data) {
+        csvData.push(data);
+      })
+      .on("end", function () {
+        // Remove Header ROW
+        csvData.shift();
+
+        let query =
+          "INSERT INTO mobile_sensor_data_table (date, pm25, temp, longitude, latitude) VALUE ?;";
         connection.query(query, [csvData], (error, response) => {
           console.log(error || response);
         });
@@ -120,11 +145,8 @@ class DbService {
   async getAqiCardData() {
     try {
       const response = await new Promise((resolve, reject) => {
-        const query = "SELECT ws.location, pm25, rainPrecipitation, windSpeed, visibility, date FROM weather_station_data_table wsData, "+
-        "weather_station_table ws, "+
-        "data_source_table ds "+
-        "WHERE wsData.dsID = ds.dsID AND ws.wsDsID = ds.dsID AND ws.location = 'dhaka' "+
-        "ORDER BY date DESC LIMIT 1;";
+        const query =
+          "SELECT location, pm25, rainPrecipitation, windSpeed, visibility, date FROM weather_station_data_table ORDER BY date DESC LIMIT 1;";
         connection.query(query, (err, results) => {
           if (err) reject(new Error(err.message));
           resolve(results);

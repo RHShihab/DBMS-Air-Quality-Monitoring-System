@@ -38,7 +38,7 @@ document
       body: JSON.stringify({ localTime, pmVal, divisionVal, orgVal }),
     }).then((response) => response.json());
 
-    location.href = "admin.html";
+    // location.href = "admin.html";
   });
 
 // document

@@ -60,10 +60,10 @@ app.post("/insert", (request, response) => {
     .catch((err) => console.log(err));
 });
 
-app.post("/uploadfile", (req, res) => {
+app.post("/uploadweather", (req, res) => {
   if (req.files) {
     console.log(req.files);
-    var file = req.files.uploadFile;
+    var file = req.files.uploadWeather;
     var filename = file.name;
 
     console.log(filename);
@@ -77,7 +77,35 @@ app.post("/uploadfile", (req, res) => {
     });
 
     const db = dbService.getDbServiceInstance();
-    db.UploadCsvDataToMySQL("./uploads/" + filename);
+    db.UploadWeatherCsvDataToMySQL("./uploads/" + filename);
+
+    // fs.createReadStream("./uploads/" + filename)
+    //   .pipe(parser({}))
+    //   .on("data", (data) => results.push(data))
+    //   .on("end", () => {
+    //     console.log(results);
+    //   });
+  }
+});
+
+app.post("/uploadsensor", (req, res) => {
+  if (req.files) {
+    console.log(req.files);
+    var file = req.files.uploadSensor;
+    var filename = file.name;
+
+    console.log(filename);
+
+    file.mv("./uploads/" + filename, function (err) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("File Uploaded");
+      }
+    });
+
+    const db = dbService.getDbServiceInstance();
+    db.UploadSensorCsvDataToMySQL("./uploads/" + filename);
 
     // fs.createReadStream("./uploads/" + filename)
     //   .pipe(parser({}))
