@@ -28,6 +28,24 @@ app.get("/", (request, response) => {
     .catch((err) => console.log(err));
 });
 
+app.get("/getRouteWiseData", (request, response) => {
+  const db = dbService.getDbServiceInstance();
+  const result = db.getRouteWiseData();
+
+  result
+    .then((data) => response.json({ data: data }))
+    .catch((err) => console.log(err));
+});
+
+app.get("/getAqiCardData", (request, response) => {
+  const db = dbService.getDbServiceInstance();
+  const result = db.getAqiCardData();
+
+  result
+    .then((data) => response.json({ data: data }))
+    .catch((err) => console.log(err));
+});
+
 app.post("/insert", (request, response) => {
   console.log(request.body);
 

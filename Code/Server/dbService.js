@@ -30,7 +30,7 @@ class DbService {
     try {
       const response = await new Promise((resolve, reject) => {
         const query =
-          "SELECT time, pm25, avgTemperature, rainPrecipitation, relativeHumidity, division FROM (SELECT * FROM datasheet.aqm_table ORDER BY time DESC LIMIT 50) AS latestData ORDER BY time;";
+          "SELECT date, pm25 FROM (SELECT * FROM mydb.weather_station_data_table ORDER BY date DESC LIMIT 50) AS latestData ORDER BY date;";
         connection.query(query, (err, results) => {
           if (err) reject(new Error(err.message));
           resolve(results);
@@ -99,7 +99,46 @@ class DbService {
 
     stream.pipe(csvStream);
   }
+
+  async getRouteWiseData() {
+    try {
+      const response = await new Promise((resolve, reject) => {
+        const query = "SELECT * FROM mydb.mobile_sensor_data_table;";
+        connection.query(query, (err, results) => {
+          if (err) reject(new Error(err.message));
+          resolve(results);
+        });
+      });
+
+      // console.log(response);
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async getAqiCardData() {
+    try {
+      const response = await new Promise((resolve, reject) => {
+        const query = "SELECT ws.location, pm25, rainPrecipitation, windSpeed, visibility, date FROM weather_station_data_table wsData, "+
+        "weather_station_table ws, "+
+        "data_source_table ds "+
+        "WHERE wsData.dsID = ds.dsID AND ws.wsDsID = ds.dsID AND ws.location = 'dhaka' "+
+        "ORDER BY date DESC LIMIT 1;";
+        connection.query(query, (err, results) => {
+          if (err) reject(new Error(err.message));
+          resolve(results);
+        });
+      });
+
+      // console.log(response);
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
+
 console.log(process.env.DBPORT);
 
 module.exports = DbService;

@@ -17,7 +17,10 @@
     />
     <link rel="stylesheet" href="style.css" />
     <script type="module" src="orgChart.js"></script>
-
+    <!-- Load plotly.js into the DOM -->
+    <script src="https://cdn.plot.ly/plotly-2.14.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+    <script type="module" src="plotly.js"></script>
     <nav class="navbar shadow fixed-top">
       <div class="container">
         <a class="navbar-brand" href="index.html">
@@ -33,34 +36,34 @@
   </head>
 
   <body class="container">
-    <div class="card shadow" style="width: 23rem">
+    <div class="card shadow" style="width: 23rem;">
       <div class="card-body">
-        <h5 class="card-title text-center">Air Quality of SOMEPLACE</h5>
+        <h5 class="card-title text-center" id="aqiCardTitle">Air Quality of SOMEPLACE</h5>
         <hr />
-        <div class="row border rounded air-quality">
-          <div class="col">pm2.5<br />127 μg/m<sup>3</sup></div>
+        <div class="row border rounded air-quality" >
+          <div class="col">pm2.5<br /><div id="aqiCardPm25">127</div> μg/m<sup>3</sup></div>
           <div class="col border-start">
             <div class="row border-bottom">
-              <div class="col"><i class="fas fa-cloud-sun-rain"></i> 35%</div>
+              <div class="col" id="aqiCardrain"><i class="fas fa-cloud-sun-rain"></i> 35%</div>
             </div>
             <div class="row">
-              <div class="col"><i class="fa-solid fa-wind"></i> 8.5 km/h</div>
+              <div class="col" id="aqiCardwind"><i class="fa-solid fa-wind"></i> 8.5 km/h</div>
             </div>
           </div>
           <div class="col border-start">
             <div class="row border-bottom">
-              <div class="col">
+              <div class="col" id="aqiCardtemp">
                 <i class="fa-solid fa-temperature-half"></i> 20&#8451;
               </div>
             </div>
             <div class="row">
-              <div class="col">
+              <div class="col" id="aqiCardvisibility">
                 <i class="fa-solid fa-eye-low-vision"></i> 2.2
               </div>
             </div>
           </div>
         </div>
-        <div>some text will be shown. gyani kotha barta bola hobe.</div>
+        <div id="aqiCardDate">some text will be shown. gyani kotha barta bola hobe.</div>
       </div>
     </div>
 
@@ -78,13 +81,13 @@
       </div>
     </div>
 
-    <!-- <div class="card shadow">
+    <div class="card shadow">
       <div class="card-body">
-        <h5 class="card-title text-center">Box plot</h5>
-        <canvas id="orgBoxplotChart" width="20rem" height="10rem"></canvas>
+        <h5 class="card-title text-center">Route-wise data</h5>
+        <div id='myDiv'>
       </div>
-    </div> -->
-    
+    </div>
+
     <script
       type="text/javascript"
       src="https://www.gstatic.com/charts/loader.js"
@@ -100,7 +103,7 @@
       type="text/javascript"
       src="https://unpkg.com/chartjs-chart-geo@3.5.2/build/index.umd.min.js"
     ></script>
-    
+
     <!-- <script type="module" src="lineChart.js"></script> -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
