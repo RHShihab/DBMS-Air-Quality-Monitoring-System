@@ -1,7 +1,5 @@
-var startDate;
-var endDate;
 
-export const getJsonData = getSelectedData(startDate, endDate);
+export const getpm25Data = getPm25DataOfOrganization();
 export const routeWiseData = getRouteWiseData();
 export const aqiCard_Data = getAqiCardData();
 
@@ -23,25 +21,19 @@ const endElem = document.getElementById("lineEndDate");
 //   getSelectedData(startDate, endDate);
 // };
 
-async function getSelectedData(startDate, endDate) {
+async function getPm25DataOfOrganization() {
   // console.log(startDate + endDate);
-  var data = { startDate, endDate };
+  var data = {};
   var res;
-  // console.log(data);
-  if (startDate == null && endDate == null) {
-    res = await fetch("http://localhost:3000/");
-    // var obj = await res.json();
-    // console.log("here: " + obj.data);
-    // return obj.data;
-  } else {
-    res = await fetch("http://localhost:3000/selectedDate", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-  }
+
+  res = await fetch("http://localhost:3000/selectedDate", {
+    method: "post",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
   var obj = await res.json();
   console.log(obj.data);
   return obj.data;

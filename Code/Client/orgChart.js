@@ -1,4 +1,4 @@
-import { getJsonData } from "./app.js";
+import { getpm25Data } from "./app.js";
 import { aqiCard_Data } from "./app.js";
 
 // loads AQI card
@@ -17,62 +17,49 @@ else if(aqiCardData[0].pm25<201) document.querySelector(".air-quality").style.ba
 else if(aqiCardData[0].pm25>200) document.querySelector(".air-quality").style.backgroundColor = "rgb(219, 97, 97)"; // middle
 // console.log(aqiCardData[0].pm25.toString())
 
-let jsonData = await getJsonData;
+let jsonpm25Data = await getpm25Data;
 // console.log(JSON.stringify(jsonData));
 // const labels = ["time", "pm25", "March", "April", "May", "June"];
 const orgLineData = {
   //   labels: labels,
   datasets: [
     {
-      label: "pm2.5",
+      label: "EPA",
       backgroundColor: "rgb(214, 161, 92)",
       borderColor: "rgb(214, 161, 92)",
       //   data: [0, 10, 5, 2, 20, 30, 45],
-      data: jsonData,
+      data: jsonpm25Data,
       tension: 0.5,
       parsing: {
         //this sets the x and y axis labels
         xAxisKey: "date",
-        yAxisKey: "pm25",
+        yAxisKey: "pm251",
       },
     },
     {
-      label: "Average Temperature",
+      label: "PurpleAir",
       backgroundColor: "rgb(255, 99, 132)",
       borderColor: "rgb(255, 99, 132)",
       //   data: [0, 10, 5, 2, 20, 30, 45],
-      data: jsonData,
+      data: jsonpm25Data,
       tension: 0.5,
       parsing: {
         //this sets the x and y axis labels
         xAxisKey: "date",
-        yAxisKey: "avgTemperature",
+        yAxisKey: "pm252",
       },
     },
     {
-      label: "Relative Humidity",
+      label: "IQAir",
       backgroundColor: "rgb(196, 194, 73)",
       borderColor: "rgb(196, 194, 73)",
       //   data: [0, 10, 5, 2, 20, 30, 45],
-      data: jsonData,
+      data: jsonpm25Data,
       tension: 0.5,
       parsing: {
         //this sets the x and y axis labels
         xAxisKey: "date",
-        yAxisKey: "relativeHumidity",
-      },
-    },
-    {
-      label: "Rain Precipitation",
-      backgroundColor: "rgb(30, 133, 201)",
-      borderColor: "rgb(30, 133, 201)",
-      //   data: [0, 10, 5, 2, 20, 30, 45],
-      data: jsonData,
-      tension: 0.5,
-      parsing: {
-        //this sets the x and y axis labels
-        xAxisKey: "date",
-        yAxisKey: "rainPrecipitation",
+        yAxisKey: "pm253",
       },
     },
   ],
@@ -83,13 +70,15 @@ const lineConfig = {
   data: orgLineData,
   options: {
     scales: {
-      x: {
-        ticks: { color: "black", beginAtZero: true, maxTicksLimit: 20 },
+      xAxes: {
+        ticks: { color: "black", maxTicksLimit: 20 },
         grid: { color: "grey" },
+        stacked: true,
       },
-      y: {
+      yAxes: {
         ticks: { color: "black", beginAtZero: true },
         grid: { color: "grey" },
+        stacked: false,
       },
     },
   },
@@ -100,11 +89,61 @@ const lineChart = new Chart(
   lineConfig
 );
 
+var y0 = [];
+var y1 = [];
+var y2 = [];
+for (var i = 0; i < jsonpm25Data.length; i ++) {
+	y0[i] = jsonpm25Data[i].pm251;
+	y1[i] = jsonpm25Data[i].pm252;
+	y2[i] = jsonpm25Data[i].pm253;
+}
+
+var trace1 = {
+  y: y0,
+  type: 'box',
+  name: 'EPA'
+};
+
+var trace2 = {
+  y: y1,
+  type: 'box',
+  name: 'PurpleAir'
+};
+
+var trace3 = {
+  y: y2,
+  type: 'box',
+  name: 'IQAir'
+};
+
+var data = [trace1, trace2, trace3];
+
+Plotly.newPlot('orgboxPlotChart', data);
+
 const orgScatterData = {
   //   labels: labels,
   datasets: [
     {
-      label: "pm2.5",
+      label: "EPA vs PurpleAir",
+      backgroundColor: "rgb(255, 99, 132)",
+      borderColor: "rgb(255, 99, 132)",
+      //   data: [0, 10, 5, 2, 20, 30, 45],
+      // data: [
+      //   { x: 34, y: 23 },
+      //   { x: 54, y: 23 },
+      //   { x: 65, y: 12 },
+      //   { x: 53, y: 64 },
+      //   { x: 13, y: 54 }
+      // ],
+      data: jsonpm25Data,
+      parsing: {
+        //this sets the x and y axis labels
+        xAxisKey: "pm252",
+        yAxisKey: "pm251",
+      },
+    },
+    {
+      label: "EPA vs IQAir",
       backgroundColor: "rgb(214, 161, 92)",
       borderColor: "rgb(214, 161, 92)",
       //   data: [0, 10, 5, 2, 20, 30, 45],
@@ -115,11 +154,11 @@ const orgScatterData = {
       //   { x: 53, y: 64 },
       //   { x: 13, y: 54 }
       // ],
-      data: jsonData,
+      data: jsonpm25Data,
       parsing: {
         //this sets the x and y axis labels
-        xAxisKey: "relativeHumidity",
-        yAxisKey: "pm25",
+        xAxisKey: "pm253",
+        yAxisKey: "pm251",
       },
     },
   ],
@@ -136,37 +175,35 @@ const scatterChart = new Chart(
   scatterConfig
 );
 
-const orgBoxplotData = {
-  //   labels: labels,
-  datasets: [
-    {
-      label: "pm2.5",
-      outlierColor: "#999999",
-      backgroundColor: "rgba(214, 161, 92, 0.2)",
-      borderColor: "rgb(214, 161, 92)",
-      padding: 0,
-      itemRadius: 0,
-      data: jsonData,
-      parsing: {
-        //this sets the x and y axis labels
-        xAxisKey: "pm25",
-      },
-    },
-  ],
-};
 
-const BoxplotConfig = {
-  type: "boxplot",
-  data: orgBoxplotData,
-  options: {
-    responsive: true,
-    legend: {
-      position: "top",
-    },
-  },
-};
+google.charts.load('current', {
+  'packages': ['geochart'],
+});
+google.charts.setOnLoadCallback(drawRegionsMap);
 
-// const BoxplotChart = new Chart(
-//   document.getElementById("orgBoxplotChart"),
-//   BoxplotConfig
-// );
+function drawRegionsMap() {
+  var data = google.visualization.arrayToDataTable([
+    ['Division', 'AQI'],
+    ['BD-A', 156],
+    ['BD-B', 72],
+    ['BD-C', 83],
+    ['BD-D', 51],
+    ['BD-E', 63],
+    ['BD-F', 94],
+    ['BD-G', 95],
+    ['BD-H', 69],
+  ]);
+
+  var options = {
+    region: 'BD',
+    displayMode: 'regions',
+    resolution: 'provinces',
+    datalessRegionColor: 'transparent',
+    width: 1000,
+    height: 1000
+  };
+
+  var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+
+  chart.draw(data, options);
+}

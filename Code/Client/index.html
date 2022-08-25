@@ -36,18 +36,28 @@
   </head>
 
   <body class="container">
-    <div class="card shadow" style="width: 23rem;">
+    <div class="card shadow" style="width: 23rem">
       <div class="card-body">
-        <h5 class="card-title text-center" id="aqiCardTitle">Air Quality of SOMEPLACE</h5>
+        <h5 class="card-title text-center" id="aqiCardTitle">
+          Air Quality of SOMEPLACE
+        </h5>
         <hr />
-        <div class="row border rounded air-quality" >
-          <div class="col">pm2.5<br /><div id="aqiCardPm25">127</div> μg/m<sup>3</sup></div>
+        <div class="row border rounded air-quality">
+          <div class="col">
+            pm2.5<br />
+            <div id="aqiCardPm25">127</div>
+            μg/m<sup>3</sup>
+          </div>
           <div class="col border-start">
             <div class="row border-bottom">
-              <div class="col" id="aqiCardrain"><i class="fas fa-cloud-sun-rain"></i> 35%</div>
+              <div class="col" id="aqiCardrain">
+                <i class="fas fa-cloud-sun-rain"></i> 35%
+              </div>
             </div>
             <div class="row">
-              <div class="col" id="aqiCardwind"><i class="fa-solid fa-wind"></i> 8.5 km/h</div>
+              <div class="col" id="aqiCardwind">
+                <i class="fa-solid fa-wind"></i> 8.5 km/h
+              </div>
             </div>
           </div>
           <div class="col border-start">
@@ -63,13 +73,18 @@
             </div>
           </div>
         </div>
-        <div id="aqiCardDate">some text will be shown. gyani kotha barta bola hobe.</div>
+        <div id="aqiCardDate">
+          some text will be shown. gyani kotha barta bola hobe.
+        </div>
       </div>
     </div>
 
     <div class="card shadow">
       <div class="card-body">
-        <h5 class="card-title text-center">Air Quality Parameters Over Time</h5>
+        <h5 class="card-title text-center">
+          Comparison Between Air Quality Parameters Over Time From Different
+          Data Source
+        </h5>
         <canvas id="orgLineChart" width="20rem" height="10rem"></canvas>
       </div>
     </div>
@@ -83,10 +98,30 @@
 
     <div class="card shadow">
       <div class="card-body">
-        <h5 class="card-title text-center">Route-wise data</h5>
-        <div id='myDiv'>
+        <h5 class="card-title text-center">Box Plot</h5>
+        <div id="orgboxPlotChart"></div>
       </div>
     </div>
+    
+    <div class="card shadow">
+      <div class="card-body">
+        <h5 class="card-title text-center">division-wise geo-map</h5>
+        <script
+          type="text/javascript"
+          src="https://www.gstatic.com/charts/loader.js"
+        ></script>
+        <script type="text/javascript" src="geoChart.js"></script>
+        <div id="regions_div" style="align-items: center;"></div>
+      </div>
+    </div>
+    
+    <div class="card shadow">
+      <div class="card-body">
+        <h5 class="card-title text-center">Route-wise data</h5>
+        <div id="myDiv"></div>
+      </div>
+    </div>
+
 
     <script
       type="text/javascript"

@@ -28,6 +28,15 @@ app.get("/", (request, response) => {
     .catch((err) => console.log(err));
 });
 
+app.post("/selectedDate", (request, response) => {
+  console.log(request.body.organizationName);
+  const db = dbService.getDbServiceInstance();
+  const result = db.getSelectedData();
+
+  result
+    .then((data) => response.json({ data: data }))
+});
+
 app.get("/getRouteWiseData", (request, response) => {
   const db = dbService.getDbServiceInstance();
   const result = db.getRouteWiseData();

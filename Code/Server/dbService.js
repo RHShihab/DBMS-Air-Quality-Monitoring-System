@@ -43,6 +43,31 @@ class DbService {
     }
   }
 
+  async getSelectedData(){
+    // var startDate = "'2017-01-10'";
+    // var endDate = "'2017-02-10'";
+    try {
+      const response = await new Promise((resolve, reject) => {
+        const query = 
+        "SELECT distinct(t1.date), t1.pm25 as pm251, t1.organizationName, t2.pm25 as pm252, t2.organizationName, t3.pm25 as pm253, t3.organizationName " +
+        "FROM (SELECT date, pm25, organizationName FROM mydb.weather_station_data_table WHERE organizationName = 'EPA') as t1, " +
+        "(SELECT date, pm25, organizationName FROM mydb.weather_station_data_table WHERE organizationName = 'PurpleAir') as t2, " +
+        "(SELECT date, pm25, organizationName FROM mydb.weather_station_data_table WHERE organizationName = 'IQAir') as t3 " +
+        "WHERE t1.date = t2.date AND t1.date=t3.date "+
+        "ORDER BY t1.date"
+        connection.query(query, (err, results) => {
+          if (err) reject(new Error(err.message));
+          resolve(results);
+        });
+      });
+
+      console.log(response);
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   async insertData(localTime, pmVal, divisionVal, orgVal) {
     try {
       // const localDate = new Date();

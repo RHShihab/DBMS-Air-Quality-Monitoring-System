@@ -41,39 +41,9 @@ document
     // location.href = "admin.html";
   });
 
-// document
-//   .getElementById("uploadFileButton")
-//   .addEventListener("click", function (e) {
-//     e.preventDefault();
-
-//     fetch("http://localhost:3000/uploadfile", {
-//       headers: {
-//         "Content-type": "multipart/form-data",
-//       },
-//       method: "POST",
-//       body: FormData,
-//     })
-//       .then((response) => response.json())
-//       .then((data) => console.log(data));
-//   });
-
-// var fileInput = document.getElementById("uploadFileButton");
-// fileInput.addEventListener("click", function (event) {
-//   e.preventDefault();
-//   var csvInput = event.target;
-//   var file = csvInput.files[0];
-//   Papa.parse(file, {
-//     complete: function (results) {
-//       console.log(results.data);
-//       // process the JSON
-
-//       fetch("http://localhost:3000/uploadfile", {
-
-//         method: "POST",
-//         body: results.data,
-//       })
-//         .then((response) => response.json(results.data))
-//         .then(console.log(results.data));
-//     },
-//   });
-// });
+  document
+  .getElementById("seeMessage")
+  .addEventListener("click", function (e) {
+    e.preventDefault();
+    location.href = "groupChat.html";
+  });
