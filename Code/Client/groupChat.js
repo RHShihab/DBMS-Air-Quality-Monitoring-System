@@ -2,7 +2,7 @@ document.querySelector(".sendButton").addEventListener("click", sendMessage);
 
 function sendMessage(e){
     e.preventDefault();
-    var userName = "shihab_bhai"
+    var userName = "shihab"
     var message = document.querySelector(".messageBox").innerHTML;
     console.log(userName, message);
     createMessage(userName, message);

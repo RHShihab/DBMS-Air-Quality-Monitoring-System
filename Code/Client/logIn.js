@@ -8,7 +8,7 @@ logInButton.addEventListener("click", logIn);
 function logIn(e){
     e.preventDefault();
     console.log(userId.value);
-    if(userId.value=="shihab" && userPass.value=="joss"){
+    if(userId.value=="admin" && userPass.value=="admin"){
         location.href = "admin.html";
     }
     else{

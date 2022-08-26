@@ -37,7 +37,7 @@ document
       method: "POST",
       body: JSON.stringify({ localTime, pmVal, divisionVal, orgVal }),
     }).then((response) => response.json());
-
+    alert("Data is updated!");
     // location.href = "admin.html";
   });
 
